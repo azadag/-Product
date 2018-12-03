@@ -1,0 +1,62 @@
+﻿Region_Sales_Out,Order,Region_Sales Car
+CA SFH (SAAR),1,CA SFH (SAAR)
+CA Condo/Townhomes,2,CA Condo/Townhomes
+Los Angeles Metropolitan Area,3,Los Angeles Metropolitan Area
+Inland Empire,4,Inland Empire
+S.F. Bay Area,5,S.F. Bay Area
+US,6,United States
+,7,
+S.F. Bay Area,8,
+Alameda,9,Alameda
+Contra Costa,10,Contra-Costa
+Marin,11,Marin
+Napa,12,Napa
+San Francisco,13,San Francisco
+San Mateo,14,San Mateo
+Santa Clara,15,Santa Clara
+Solano,16,Solano
+Sonoma,17,Sonoma
+Southern California,18,
+Los Angeles,19,Los Angeles
+Orange ,20,Orange County
+Riverside ,21,Riverside County
+San Bernardino,22,San Bernardino
+San Diego,23,San Diego
+Ventura,24,Ventura
+Central Coast,25,
+Monterey,26,Monterey
+San Luis Obispo,27,San Luis Obispo
+Santa Barbara,28,Santa Barbara
+Santa Cruz,29,Santa Cruz
+Central Valley,30,
+Fresno,31,Fresno
+Kern,32,Kern (Bakersfield)
+Kings ,33,Kings County
+Madera,34,Madera
+Merced,35,Merced
+Placer ,36,Placer County
+Sacramento,37,Sacramento
+San Benito,38,San Benito
+San Joaquin,39,San Joaquin
+Stanislaus,40,Stanislaus
+Tulare,41,Tulare
+Other Counties in California,42,
+Amador,43,Amador
+Butte,44,Butte County
+Calaveras,45,Calaveras
+El Dorado,46,El Dorado County
+Humboldt,47,Humboldt
+Lake County,48,Lake County
+Lassen,49,Lassen
+Mariposa,50,Mariposa
+Mendocino,51,Mendocino
+Mono,52,Mono
+Nevada,53,Nevada
+Plumas,54,Plumas
+Shasta,55,Shasta
+Siskiyou,56,Siskiyou County
+Sutter,57,Sutter
+Tehama,58,Tehama
+Tuolumne,59,Tuolumne
+Yolo,60,Yolo
+Yuba,61,Yuba

@@ -1,0 +1,66 @@
+RegionIncomeClar,RegionSalesCar,OutputOrderOld,OutputOrder2,OutputOrder3,Addable
+CA.xlsx,CA SFH (SAAR),1,1,1,0
+CA.xlsx,CA Condo/Townhomes,2,2,2,0
+LA Metro.xlsx,Los Angeles Metropolitan Area,3,3,3,0
+Contra Costa County,Contra-Costa,8,8,8,0
+Inland Empire.xlsx,Inland Empire,4,4,4,0
+Bay Area.xlsx,S.F. Bay Area,5,5,5,0
+US.xlsx,United States,6,6,6,0
+Alameda County,Alameda,7,7,7,0
+Marin County,Marin,9,9,9,0
+Napa County,Napa,10,10,10,0
+San Francisco County,San Francisco,11,11,11,0
+San Mateo County,San Mateo,12,12,12,0
+Santa Clara County,Santa Clara,13,13,13,0
+Solano County,Solano,14,14,14,0
+Sonoma County,Sonoma,15,15,15,0
+Los Angeles County,Los Angeles,16,16,16,0
+Orange County,Orange County,17,17,17,0
+Riverside County,Riverside County,18,18,18,0
+San Bernardino County,San Bernardino,19,19,19,0
+San Diego County,San Diego,20,20,20,0
+Ventura County,Ventura,21,21,21,0
+Monterey County,Monterey,22,22,22,0
+San Luis Obispo County,San Luis Obispo,22,22,22,0
+Santa Barbara County,Santa Barbara,22,22,22,0
+Santa Cruz County,Santa Cruz,22,22,22,0
+Fresno County,Fresno,23,23,23,0
+Kern County,Kern (Bakersfield),24,24,24,0
+Kings County,Kings County,25,25,25,0
+Madera County,Madera,26,26,26,0
+Merced County,Merced,27,27,27,0
+Placer County,Placer County,28,28,28,0
+Sacramento County,Sacramento,29,29,29,0
+San Benito County,San Benito,30,30,30,1
+San Joaquin County,San Joaquin,30,31,31,0
+Stanislaus County,Stanislaus,31,32,32,0
+Tulare County,Tulare,32,33,33,0
+Amador County,Amador,,34,34,1
+Butte County,Butte County,,35,35,1
+El Dorado County,El Dorado County,,36,37,1
+Humboldt County,Humboldt,,37,38,1
+Lake County,Lake County,,38,39,1
+Tuolumne County,Tuolumne,,39,50,1
+Mendocino County,Mendocino,,40,42,1
+Shasta County,Shasta,,41,46,1
+Siskiyou County,Siskiyou County,,42,47,1
+Sutter County,Sutter,,43,48,1
+Tehama County,Tehama,,44,49,1
+Yolo County,Yolo,,45,51,1
+Yuba County,Yuba,,46,52,1
+So Cal.xlsx,Southern California,,,,2
+Alpine County,,,,,2
+Calaveras County,Calaveras,,,36,1
+Colusa County,,,,,2
+Del Norte County,,,,,2
+Glenn County,,,,,2
+Imperial County,,,,,2
+Inyo County,,,,,2
+Lassen County,Lassen,,,40,1
+Mariposa County,Mariposa,,,41,1
+Modoc County,,,,,2
+Mono County,Mono,,,43,1
+Nevada County,Nevada,,,44,1
+Plumas County,Plumas,,,45,1
+Sierra County,,,,,2
+Trinity County,,,,,2

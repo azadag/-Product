@@ -1,0 +1,51 @@
+Reorder_TOM,order_og,order_out
+Alameda,7,2
+Amador,37,3
+Butte County,38,4
+Contra-Costa,8,5
+El Dorado County,39,6
+Fresno,26,7
+Humboldt,40,8
+Kern (Bakersfield),27,9
+Kings County,28,10
+Lake County,41,11
+Los Angeles,16,12
+Madera,29,13
+Marin,9,14
+Mariposa And Tuolumne,42,15
+Mendocino,43,16
+Merced,30,17
+Monterey,22,18
+Napa,10,19
+Orange County,17,20
+Placer County,31,21
+Riverside County,18,22
+Sacramento,32,23
+San Benito,33,24
+San Bernardino,19,25
+San Diego,20,26
+San Francisco,11,27
+San Joaquin,34,28
+San Luis Obispo,23,29
+San Mateo,12,30
+Santa Barbara,24,31
+Santa Clara,13,32
+Santa Cruz,25,33
+Shasta,44,34
+Siskiyou County,45,35
+Solano,14,36
+Sonoma,15,37
+Stanislaus,35,38
+Sutter,46,39
+Tehama,47,40
+Tulare,36,41
+Ventura,21,42
+Yolo,48,43
+Yuba,49,44
+` `,,45
+CA SFH (SAAR),1,1
+CA Condo/Townhomes,2,46
+Los Angeles Metropolitan Area,3,47
+Inland Empire,4,48
+S.F. Bay Area,5,49
+United States,6,50

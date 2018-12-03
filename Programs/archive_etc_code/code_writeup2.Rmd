@@ -1,0 +1,214 @@
+---
+title: "HAI-Report"
+author: "CAR"
+date: "October 29, 2018"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r load_packages, include=FALSE, error= TRUE, cache.lazy=TRUE }
+# library(broman)
+library(scales)
+library(readxl)
+library(xlsx)
+library(lubridate)
+library(dplyr)
+library(tidyr)
+library(here)
+library(zoo)
+library(tempdisagg)
+library(financial)
+library(stringr)
+library(glue)
+load("Z:/Shared With Me/MemInfo (2)/R&E (Dec 2017)/Products/HAI\\!Product\\Output_Data\\_sourcedata\\2018-Q3.RData") ## update with most recent quarter 
+source("Z:/Shared With Me/MemInfo (2)/R&E (Dec 2017)/Products/HAI\\!Product\\Programs\\helper_knit_functions.r")
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+
+sprintf_transformer <- function(text, envir) {
+  m <- regexpr(":.+$", text)
+  if (m != -1) {
+    format <- substring(regmatches(text, m), 2)
+    regmatches(text, m) <- ""
+    res <- eval(parse(text = text, keep.source = FALSE), envir)
+    do.call(sprintf, list(glue("%{format}f"), res))
+  } else {
+    eval(parse(text = text, keep.source = FALSE), envir)
+  }
+}
+
+glue_fmt <- function(..., .envir = parent.frame()) {
+  glue(..., .transformer = sprintf_transformer, .envir = .envir)
+}
+
+# library(tidyverse)
+
+```
+
+```{r setup, include=FALSE, cache.lazy=TRUE, echo = FALSE, warning = FALSE}
+## region fix
+df_region_template$groups <- case_when(df_region_template$Order <= 8 ~ NA_character_,
+                                       df_region_template$Order > 8  & df_region_template$Order < 18 ~ "S.F. Bay Area",
+                                       df_region_template$Order > 18 & df_region_template$Order < 25 ~ "Southern California",
+                                       df_region_template$Order > 25 & df_region_template$Order < 30 ~ "Central Coast",
+                                       df_region_template$Order > 30 & df_region_template$Order < 42 ~ "Central Valley",
+                                       df_region_template$Order > 42 ~ "Other Counties in California",
+                                       FALSE ~ NA_character_)
+
+dfA <- df.TradAffordOut_template %>% inner_join(df_region_template, by = c(`STATE/REGION/COUNTY` = "Region_Sales_Out"))
+
+dfA$QCH_pos <- round( dfA[[2]], 2 ) - round( dfA[[3]], 2) > 0
+dfA$QCH_neg <- round( dfA[[2]], 2 ) - round( dfA[[3]], 2) < 0
+dfA$QCH_zer <- round( dfA[[2]], 2 ) - round( dfA[[3]], 2) == 0
+dfA$YCH_pos <- round( dfA[[2]], 2 ) - round( dfA[[5]], 2) > 0
+dfA$YCH_neg <- round( dfA[[2]], 2 ) - round( dfA[[5]], 2) < 0
+dfA$YCH_zer <- round( dfA[[2]], 2 ) - round( dfA[[5]], 2) == 0
+
+dfA$QCH <- round( dfA[[2]] - dfA[[3]], 2 )
+dfA$YCH <- round( dfA[[2]] - dfA[[5]], 2 )  
+dfA$QpctCH <- round( (dfA[[2]] - dfA[[3]]) / dfA[[2]], 2 )
+dfA$YpctCH <- round( (dfA[[2]] - dfA[[5]]) / dfA[[2]], 2 )
+
+Count_Pos_Quart <- dfA %>% group_by(groups) %>% tally(QCH_pos)
+Count_Neg_Quart <- dfA %>% group_by(groups) %>% tally(QCH_neg)
+Count_Zer_Quart <- dfA %>% group_by(groups) %>% tally(QCH_zer)
+
+Count_Quart <- bind_cols(Count_Pos_Quart, Count_Neg_Quart, Count_Zer_Quart) %>% filter(!is.na(groups))
+
+
+name_county_quart_pos <- dfA %>% filter(QCH_pos == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse(`STATE/REGION/COUNTY`, sep =", ", last=" and "))  
+  #glue_collapse( (dfA %>% filter(QCH_pos == TRUE, !is.na(groups)))$`STATE/REGION/COUNTY`, sep =", ", last=" and ") 
+name_county_quart_neg <- dfA %>% filter(QCH_neg == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse(`STATE/REGION/COUNTY`, sep =", ", last=" and ")) 
+name_county_quart_zer <- dfA %>% filter(QCH_zer == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse(`STATE/REGION/COUNTY`, sep =", ", last=" and "))
+
+Count_Quart <- Count_Quart %>% full_join(name_county_quart_pos, by = c("groups"= "groups")) %>% 
+                               full_join(name_county_quart_neg, by = c("groups"= "groups")) %>% 
+                               full_join(name_county_quart_zer, by = c("groups"= "groups"))
+
+Count_Pos_Year  <- dfA %>% group_by(groups) %>% tally(YCH_pos)
+Count_Neg_Year  <- dfA %>% group_by(groups) %>% tally(YCH_neg)
+Count_Zer_Year  <- dfA %>% group_by(groups) %>% tally(YCH_zer)
+
+Count_Year <- bind_cols( Count_Pos_Year, Count_Neg_Year ,Count_Zer_Year ) %>% filter(!is.na(groups))
+
+name_county_year_pos <- dfA %>% filter(YCH_pos == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse(`STATE/REGION/COUNTY`, sep =", ", last=" and "))
+name_county_year_neg <- dfA %>% filter(YCH_neg == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse(`STATE/REGION/COUNTY`, sep =", ", last=" and "))
+name_county_year_zer <- dfA %>% filter(YCH_zer == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse(`STATE/REGION/COUNTY`, sep =", ", last=" and "))
+
+Count_Year <- Count_Year %>% inner_join( name_county_year_pos, by = c("groups"= "groups")) %>% inner_join( name_county_year_neg, by = c("groups"= "groups")) %>% inner_join( name_county_year_zer, by = c("groups"= "groups"))
+
+State_Pos_Quart <- dfA %>% tally(QCH_pos)
+State_Neg_Quart <- dfA %>% tally(QCH_neg)
+State_Zer_Quart <- dfA %>% tally(QCH_zer)
+
+State_Pos_Year  <- dfA %>% filter(Order > 9) %>% tally(YCH_pos)
+State_Neg_Year  <- dfA %>% filter(Order > 9) %>% tally(YCH_neg)
+State_Zer_Year  <- dfA %>% filter(Order > 9) %>% tally(YCH_zer)
+
+## verbose county by county
+dfA <- dfA %>% mutate( verbose_changes_quart = paste0( `STATE/REGION/COUNTY`, " (",   .[[2]] , " to ", .[[3]], ")"), verbose_changes_year = paste0( `STATE/REGION/COUNTY`, " (",   .[[2]] , " to ", .[[5]], ")"), 
+                verbose_names_points_quart = case_when( QCH_pos == TRUE ~ paste0( "up ",  numbers2words(abs(QCH)), " points"),
+                                                        QCH_neg == TRUE ~ paste0( "down ",numbers2words(abs(QCH)), " points"),
+                                                        QCH_zer == TRUE ~ paste0( "was flat "),
+                                                        FALSE ~ NA_character_),
+                verbose_names_points_year = case_when(  YCH_pos == TRUE ~ paste0( "up ",  numbers2words(abs(YCH)), " points"),
+                                                        YCH_neg == TRUE ~ paste0( "down ",numbers2words(abs(YCH)), " points"),
+                                                        YCH_zer == TRUE ~ paste0( "was flat "),
+                                                        FALSE ~ NA_character_))
+
+county_group_verbose_changes_quart_pos <- dfA %>% filter(QCH_pos == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse( paste0(" ", verbose_names_points_quart, " in ", verbose_changes_quart), sep =", ", last=" and "))
+county_group_verbose_changes_quart_neg <- dfA %>% filter(QCH_neg == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse( paste0(" ", verbose_names_points_quart, " in ", verbose_changes_quart), sep =", ", last=" and "))
+county_group_verbose_changes_quart_zer <- dfA %>% filter(QCH_zer == TRUE) %>% group_by(groups) %>% summarise( list = glue_collapse( paste0(" ", verbose_names_points_quart, " in ", verbose_changes_quart), sep =", ", last=" and "))
+
+Verbose_Quart <- Count_Quart %>% select(groups) %>% full_join(county_group_verbose_changes_quart_pos, by = c("groups"= "groups")) %>% 
+                                                    full_join( county_group_verbose_changes_quart_neg, by = c("groups"= "groups")) %>% 
+                                                    full_join( county_group_verbose_changes_quart_zer, by = c("groups"= "groups"))
+                                                    
+
+county_group_verbose_changes_year_pos <- dfA %>% filter(YCH_pos == TRUE) %>% group_by(groups) %>% 
+  summarise( list = glue_collapse( paste0(" ", verbose_names_points_year, " in ", verbose_changes_year), sep =", ", last=" and "))
+county_group_verbose_changes_year_neg <- dfA %>% filter(YCH_neg == TRUE) %>% group_by(groups) %>% 
+  summarise( list = glue_collapse( paste0(" ", verbose_names_points_year, " in ", verbose_changes_year), sep =", ", last=" and "))
+county_group_verbose_changes_year_zer <- dfA %>% filter(YCH_zer == TRUE) %>% group_by(groups) %>% 
+  summarise( list = glue_collapse( paste0(" ", verbose_names_points_year, " in ", verbose_changes_year), sep =", ", last=" and "))
+
+Verbose_Year <- Count_Year %>% select(groups) %>% full_join( county_group_verbose_changes_year_pos, by = c("groups"= "groups")) %>% 
+                                                  full_join( county_group_verbose_changes_year_neg, by = c("groups"= "groups")) %>% 
+                                                  full_join( county_group_verbose_changes_year_zer, by = c("groups"= "groups"))
+
+
+```
+
+
+```{r words_and_terms, include=FALSE, cache.lazy=TRUE, echo = FALSE}
+terms_all <- c("all", "every", "100%", "a totality")
+       
+paste_term_count_quarter <- case_when ( State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) < .15 ~ "an insignificant number",
+                State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) < .15 ~ "a tiny fraction",
+                State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) < .35 ~ "a small number",
+                State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) < .5 ~ "less than half",
+                State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) < .5 ~ "more than half",
+                State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) < .67 ~ "two-thirds",
+                State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) < .8 ~ "around three quarters",
+                State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) < .95 ~ "almost ",
+                State_Pos_Quart / (State_Pos_Quart + State_Neg_Quart + State_Zer_Quart) == 1 ~ sample( terms_all, 1 ))
+
+comparison_rate_quarter_inc_dec <- case_when( tail(df_rates,2)[[3]][1] < tail(df_rates,2)[[3]][2] ~ "increased" , #were higher
+                                 tail(df_rates,2)[[3]][1] > tail(df_rates,2)[[3]][2] ~ "decreased", #were lower
+                                 tail(df_rates,2)[[3]][1] == tail(df_rates,2)[[3]][2] ~ "remained flat", #were the same
+                                 FALSE ~ NA_character_ )
+
+term_improve <- c("improved" , "increased")
+term_decline <- c("declined", "dropped")
+
+term_increase <- c("increased", "were higher", "were up", "were lower")
+term_decrease <- c("decreased", "were lower", "were down", "dropped")
+term_zero <- c("were flat", "remained still", "didn't move", "showed no movement")
+term_greaterthan <- c("above", "far above", "beyond", "over", "just over", "topped", "top", "more than", "no fewer than", "beyond", "at least")
+term_lessthan <- c("just under", "a little under", "or fewer", "less than", "fewer than", "dramatically lower than", "below")
+
+
+
+```
+
+### `r Y_Qc`  Basic Report Writeup
+
+* `r round(dfA[[2]][1])`% of California households could afford to purchase the `r scales::dollar(dfA[[7]][1])` median-priced home in `r Y_Qc`, `r ifelse(round(dfA[[2]][1],2) - round(dfA[[3]][1],2) > 0, "up from", ifelse(round(dfA[[2]][1],2) - round(dfA[[3]][1],2) < 0,  "down from", ifelse(round(dfA[[2]][1],2) - round(dfA[[3]][1],2) == 0, "flat from",NA)   ))` `r dfA[[2]][2]`% percent in `r Y_Qc0` and `r ifelse(round(dfA[[2]][1],2) - round(dfA[[5]][1],2) > 0, "up from", ifelse(round(dfA[[2]][1],2) - round(dfA[[5]][1],2) < 0,  "down from", ifelse(round(dfA[[2]][1],2) - round(dfA[[5]][1],2) == 0, "flat from",NA)   ))` from `r round(dfA[[5]][1],2)`% in `r Y_QcY0`.
+
+* A minimum annual income of `r dollar(dfA[[9]][1])` was needed to make monthly payments of `r dollar(dfA[[8]][1])`, including principal, interest, and taxes on a 30-year, fixed-rate mortgage at `r IntRate` percent interest rate. It should be noted that rates have since risen to levels not seen in 4 years, further constraining affordability.
+
+* `r percent((dfA[[2]][2]/100))` percent of home buyers were able to purchase the `r dollar(dfA[[7]][2])` median-priced condo or townhome. An annual income of `r dollar(dfA[[9]][2])` was required to make a monthly payment of `r dollar(dfA[[8]][2])`.
+
+
+#### Regional Changes
+
+* In the Los Angeles Metropolitan Area regional quarterly affordability `r ifelse(round(dfA[[2]][3],2) - round(dfA[[3]][3],2) > 0, "*increased*", ifelse(round(dfA[[2]][3],2) - round(dfA[[3]][3],2) < 0,  "*decreased*", ifelse(round(dfA[[2]][3],2) - round(dfA[[3]][3],2) == 0, "*was steady*",NA)   ))` `r ifelse( abs(round(dfA[[2]][3],2) - round(dfA[[3]][3],2)) == 0, paste( abs(round(dfA[[2]][3],2) - round(dfA[[3]][3],2))), "point(s)") ` and yearly affordability `r ifelse(round(dfA[[2]][3],2) - round(dfA[[5]][3],2) > 0, "*increased*", ifelse(round(dfA[[2]][3],2) - round(dfA[[5]][3],2) < 0,  "*decreased*", ifelse(round(dfA[[2]][3],2) - round(dfA[[5]][3],2) == 0, "*was steady*",NA)   ))` `r ifelse( abs(round(dfA[[2]][3],2) - round(dfA[[5]][3],2)) == 0, "", paste( abs(round(dfA[[2]][3],2) - round(dfA[[5]][3],2)), "point(s),")) `
+
+* In the Bay Area regional quarterly affordability `r ifelse(round(dfA[[2]][5],2) - round(dfA[[3]][5],2) > 0, "*increased*", ifelse(round(dfA[[2]][5],2) - round(dfA[[3]][5],2) < 0,  "*decreased*", ifelse(round(dfA[[2]][5],2) - round(dfA[[3]][5],2) == 0, "*was steady*",NA)   ))` `r ifelse( abs(round(dfA[[2]][5],2) - round(dfA[[3]][5],2)) == 0, paste( abs(round(dfA[[2]][5],2) - round(dfA[[3]][5],2))), "point(s)") ` and yearly affordability `r ifelse(round(dfA[[2]][5],2) - round(dfA[[5]][5],2) > 0, "*increased*", ifelse(round(dfA[[2]][5],2) - round(dfA[[5]][5],2) < 0,  "*decreased*", ifelse(round(dfA[[2]][5],2) - round(dfA[[5]][5],2) == 0, "*was steady*",NA)   ))` `r ifelse( abs(round(dfA[[2]][5],2) - round(dfA[[5]][5],2)) == 0, "", paste( abs(round(dfA[[2]][5],2) - round(dfA[[5]][5],2)), "point(s),")) `
+
+* In the Inland Empire regional quarterly affordability `r ifelse(round(dfA[[2]][4],2) - round(dfA[[3]][4],2) > 0, "*increased*", ifelse(round(dfA[[2]][4],2) - round(dfA[[3]][4],2) < 0,  "*decreased*", ifelse(round(dfA[[2]][4],2) - round(dfA[[3]][4],2) == 0, "*was steady*",NA)   ))` `r ifelse( abs(round(dfA[[2]][4],2) - round(dfA[[3]][4],2)) == 0, "", paste( abs(round(dfA[[2]][4],2) - round(dfA[[3]][4],2)), "point(s)")) ` and yearly affordability `r ifelse(round(dfA[[2]][4],2) - round(dfA[[5]][4],2) > 0, "*increased*", ifelse(round(dfA[[2]][4],2) - round(dfA[[5]][4],2) < 0,  "*decreased*", ifelse(round(dfA[[2]][4],2) - round(dfA[[5]][4],2) == 0, "*was steady*",NA)   ))` `r ifelse( abs(round(dfA[[2]][4],2) - round(dfA[[5]][4],2)) == 0, "", paste( abs(round(dfA[[2]][4],2) - round(dfA[[5]][4],2)), "point(s),")) `
+
+#### General County Changes
+
+* Rates `r comparison_rate_quarter_inc_dec` from last quarter (`r Y_Qc`) to `r paste0(tail(df_rates,2)[[3]][2],"%")` from `r paste0(tail(df_rates,2)[[3]][1],"%")` in `r Y_Qc0`.  <!-- add logic for remain flat --> 
+
+
+* MtM Affordability improved from last quarter in `r State_Pos_Quart[[1]]` tracked counties, decreased in `r State_Neg_Quart[[1]]` and remained flat in `r State_Zer_Quart[[1]]` counties. 
+```{r echo=FALSE, results='asis'}
+ cat(Count_Quart %>% glue_data("\n \n    + {groups}: {n} counties improved: ({list.x}), {n1} counties declined: ({list.y}), {n2} counties remained flat: ({list}).\n \n"))
+##*  `r Count_Quart %>% glue_data("In the {groups}, {n} counties improved, {n1} counties declined, {n2} counties remained flat. \n")`
+```
+
+* YtY Affordability improved from last quarter in `r State_Pos_Year[[1]]` tracked States, decreased in `r State_Neg_Year[[1]]` and remained flat in `r State_Zer_Year[[1]]` States. 
+```{r echo=FALSE, results='asis'}
+ cat(Count_Year %>% glue_data("\n \n    + {groups}: {n} counties improved: ({list.x}), {n1} counties declined: ({list.y}), {n2} counties remained flat: ({list}).\n \n"))
+##   `r Count_Quart %>% glue_data("In the {groups}, {n} counties improved, {n1} counties declined, {n2} counties remained flat. \n")`
+```
+
+#### County By County Changes
+* By Region QtQ
+```{r echo=FALSE, results='asis'}
+ cat(Verbose_Year %>% glue_data("\n \n    + {groups}: {n} counties improved: ({list.x}), {n1} counties declined: ({list.y}), {n2} counties remained flat: ({list}).\n \n"))
+##   `r Count_Quart %>% glue_data("In the {groups}, {n} counties improved, {n1} counties declined, {n2} counties remained flat. \n")`
+```
+

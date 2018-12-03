@@ -1,0 +1,126 @@
+CurrentPeriod <- "Q1"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2015     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-   3.97        # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <- 2.47    # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <- 204700       # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <- 229500 
+Sales_USty0 <- 191100
+
+
+CurrentPeriod <- "Q2"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2015     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  3.95         # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <- 2.55    # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <- 229500       # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  204700
+Sales_USty0 <-  212000
+
+
+CurrentPeriod <- "Q3"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2015     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  4.16         # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <- 2.62    # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-  223000      # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  229500
+Sales_USty0 <-  217300
+
+
+CurrentPeriod <- "Q4"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2015     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  4.07         # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  2.6508   # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-  223000      # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  228900
+Sales_USty0 <-  208400
+
+
+CurrentPeriod <- "Q1"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2016     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  4.01        # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  2.96      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-  217600       # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  223000
+Sales_USty0 <- 204700
+
+
+CurrentPeriod <- "Q2"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2016     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  3.85         # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  2.84      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-  241000       # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  217600
+Sales_USty0 <- 229400
+
+
+CurrentPeriod <- "Q3"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2016     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  3.76         # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  2.83      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-  240900       # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  240700
+Sales_USty0 <- 228900
+
+
+CurrentPeriod <- "Q4"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2016     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  3.91         # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  3.07      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <- 235000      # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  241300
+Sales_USty0 <- 223000
+
+CurrentPeriod <- "Q1"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2017     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-     4.36      # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  3.24      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-  232100    # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  234500
+Sales_USty0 <- 217200
+
+CurrentPeriod <- "Q2"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2017     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  4.09         # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  3.20      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <- 255600            # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  232000
+Sales_USty0 <- 240700
+
+CurrentPeriod <- "Q3"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2017     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-    4.16       # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  3.24      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-  254000      # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <- 255600  
+Sales_USty0 <- 240900
+
+CurrentPeriod <- "Q4"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2017     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-  4.17         # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  3.32      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <- 247800        # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <- 254700 
+Sales_USty0 <- 235400
+
+CurrentPeriod <- "Q1"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2018     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-   4.44        # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  3.62      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-   245500      # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  247800
+Sales_USty0 <- 232200
+
+CurrentPeriod <- "Q2"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2018     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-   4.7        # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  3.8      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-   269000      # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  245500
+Sales_USty0 <- 255600
+
+CurrentPeriod <- "Q3"    # "XXX ENTER  QUARTER IE "Q1" XXX"
+CurrentYear <-  2018     # "XXX ENTER  YEAR    IE 2016 XXX"
+IntRate <-   4.77        # "XXX ENTERenter interest rate as a PCT ie 4.01 for 4%  
+IntRateFTB <-  3.92      # Enter in from the FTB interest rate calculators -> (using average of last 3 months of http://www.freddiemac.com/pmms/pmms5.htm 5 yr )
+Sales_US <-   266900      # Enter in NAR figure, if not available keep "0" until ready
+Sales_USt0 <-  268000
+Sales_USty0 <- 254700
