@@ -2,7 +2,7 @@
 
 Production code to create housing affordability index data for California counties (and cities).
 
-## Index Basic
+## Index Basics
 
 The index incorporates county/city income distribution, mortgage rates, and housing prices to determine what percentage of people in a particular place can afford to purchase a home based on their income and the maximum monthly mortgage that can be carried. 
 
