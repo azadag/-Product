@@ -1,8 +1,5 @@
 # Housing Affordability Index Code 
 
-* add links to examples 
-* add pictures / screenshots to readme
-
 Production code to create housing affordability index data for California counties (and cities).
 
 ## Index Basic
@@ -26,6 +23,11 @@ For regions and counties, impacts and magnitudes of changes in affordability is 
 Some news rooms have experimented with this type of automated event reporting, but it has seen the most use in sports (in particular fantasy sports) event recaps. 
 
 Automating numeric reporting reduces the tediousness of looking at basic point changes for many areas, while allowing some   
+
+### Readme Todos
+* add links to examples 
+* add pictures / screenshots to readme
+* add example to "glue" reporting trick which should have value for others
 
 ## Code Improvements TBD
 
