@@ -13,7 +13,7 @@ Price data comes from internally ETLed and calculated MLS transaction data but c
 
 The income distribution (and forecast) data is interpolated from the 5 year trend forecast, into yearly and quarterly data, but only gets updated once per year. 
 
-The Index is calculated for regular buyers and first-time buyers who face a slightly different calculation of mortgage rates. As housing price data is revised from quarter to quarter the process reads in previous quarter and previous year data checks for revisions and applies revision tags.
+The Index is calculated for regular buyers and first-time buyers who face a slightly different calculation of mortgage rates. As housing price data is revised from quarter to quarter, the process reads in previous quarter and previous year data checks for revisions and applies revision tags.
 
 Data is ingested through a variety of excel sheets based on ETL processes and commercial output formats, and requires some cross-walks to harmonize data names for calculation, then re-translated and reformatted again into naming formats for news releases.
 
